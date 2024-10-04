@@ -24,11 +24,27 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Scroll Animation</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <svg width="0" height="0">
+      <defs>
+        <clipPath id="myCurve" clipPathUnits="objectBoundingBox">
+          <path
+            d="M 0,0
+               L 1,0
+               C 0.95 0.1, 0.95 0.9, 1 1
+               L 0,1
+               C 0.05 0.9, 0.05 0.1, 0 0
+               Z"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+    
+    
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
