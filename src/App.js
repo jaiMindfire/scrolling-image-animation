@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import "./App.css";
 import Page from "./Page";
 import firstImage from "../src/Images/first_image.png";
 import secondImage from "../src/Images/second_image.png";
@@ -29,15 +28,35 @@ const pagesData = [
   },
 ];
 
-function App() {
+const App = () => {
   const pageRefs = useRef(pagesData.map(() => React.createRef()));
+
+  const smoothScrollTo = (targetY, duration) => {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    const animation = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+
+      const currentY = startY + distance * progress;
+      window.scrollTo(0, currentY);
+
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  };
 
   const handleScrollToNext = (index) => {
     if (pageRefs.current[index + 1]) {
-      pageRefs.current[index + 1].current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      const targetY = pageRefs.current[index + 1].current.offsetTop;
+      const duration = 600;
+      smoothScrollTo(targetY, duration);
     }
   };
 
@@ -55,6 +74,6 @@ function App() {
       ))}
     </div>
   );
-}
+};
 
 export default App;

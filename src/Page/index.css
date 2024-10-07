@@ -17,10 +17,11 @@
   height: 90%;
   width: 50%;
   clip-path: url(#myCurve);
+  animation: bounce 1s infinite;
 }
 
 .page-content {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -70,32 +71,111 @@
   filter: invert(100%);
 }
 
-@keyframes flowIn {
+.subtitle-flow-in {
+  clip-path: inset(100% 0 0 0);
+  animation: subTitleReveal 0.3s forwards ease-in;
+}
+
+.title-flow-in {
+  clip-path: inset(100% 0 0 0);
+  animation: titleReveal 0.5s forwards ease-in;
+}
+
+.icon-flow-in {
+  clip-path: inset(0 0 0 0);
+  animation: iconReveal 0.7s forwards ease-in;
+}
+
+.subtitle-flow-out {
+  clip-path: inset(100% 0 0 0);
+  animation: subTitleDisappear 0.5s forwards ease-in;
+}
+
+.title-flow-out {
+  clip-path: inset(100% 0 0 0);
+  animation: titleDisappear 1s forwards ease-in;
+}
+
+.icon-flow-out {
+  clip-path: inset(0 0 0 0);
+  animation: iconDisappear 1.5s forwards ease-in;
+}
+
+@keyframes subTitleReveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes titleReveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes iconReveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes subTitleDisappear {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+@keyframes titleDisappear {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+@keyframes iconDisappear {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+@keyframes spring {
   0% {
-    opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(5px);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+  80% {
+    transform: translateY(1px);
   }
   100% {
-    opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes flowOut {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-.text-flow-in {
-  animation: flowIn 0.8s ease-in forwards;
-}
-
-.text-flow-out {
-  animation: flowOut 0.8s ease-in forwards;
+.spring {
+  animation: spring 1.5s ease-in-out;
 }
